@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.AdminMapper">
+  <resultMap id="adminmap" type="com.model.Admin">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="aname" jdbcType="VARCHAR" property="aname" />
+    <result column="arealname" jdbcType="VARCHAR" property="arealname" />
+    <result column="apassword" jdbcType="INTEGER" property="apassword" />
+    <result column="asex" jdbcType="VARCHAR" property="asex" />
+    <result column="atelephone" jdbcType="VARCHAR" property="atelephone" />
+    <result column="aemail" jdbcType="VARCHAR" property="aemail" />
+    <result column="aaddress" jdbcType="VARCHAR" property="aaddress" />
+  </resultMap>
+  
+  <select id="selectAdminByName" resultMap="adminmap" parameterType="string" >
+    select * from admin where aname=#{aname,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectSingleAdmin" parameterType="string" resultMap="adminmap">
+  select * from admin where aname=#{aname}
+  </select>
+  
+  <select id="selectAllAdmins" resultMap="adminmap">
+  select * from admin 
+  </select>
+  <delete id="deleteAdmin" parameterType="string">
+  delete from admin where aname=#{aname}
+  </delete>
+  <update id="updateAdmin" parameterType="com.model.Admin">
+  update admin set aname=#{aname},arealname=#{arealname},apassword=#{apassword},asex=#{asex},atelephone=#{atelephone},aemail=#{aemail},aaddress=#{aaddress} where aid=#{aid}
+  
+  </update>
+  <insert id="insertEntity" parameterType="com.model.Admin">
+  
+  insert into admin(aname,arealname,apassword,asex,atelephone,aemail,aaddress) values(#{aname},#{arealname},#{apassword},#{asex},#{atelephone},#{aemail},#{aaddress})
+  </insert>
+  
+  
+</mapper>
